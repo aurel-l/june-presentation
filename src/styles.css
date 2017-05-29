@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+}
+
+presentation-manager {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+presentation-slides {
+  flex: 1;
+}
+
+section {
+  border: 1px solid black;
+  display: none;
+  height: 100%;
+}
+
+section.visible {
+  display: block;
+}
+
+.small-caps {
+  font-variant: small-caps;
+}
