@@ -1,17 +1,35 @@
 import 'styles.css';
 
-import DataLoader from 'data-loader';
-import PresentationManager from "web-components/presentation-manager";
-import PresentationSlides from "web-components/presentation-slides";
-
 import defineWebComponent from 'utils/defineWebComponent';
 
-defineWebComponent(PresentationManager);
-defineWebComponent(
-  PresentationSlides,
-  null,
-  {slideSelector: 'section, presentation-slide'},
-);
-defineWebComponent(DataLoader, 'data-loader');
+(async () => {
+  await defineWebComponent(() =>
+    import(
+      /* webpackChunkName: 'presentation-footer' */
+      'web-components/presentation-footer',
+    ),
+  );
+  await defineWebComponent(
+    () =>
+      import(
+        /* webpackChunkName: 'presentation-slides' */
+        'web-components/presentation-slides',
+      ),
+    null,
+    {
+      slideSelector: 'section, presentation-slide',
+    },
+  );
+  await defineWebComponent(() =>
+    import(
+      /* webpackChunkName: 'presentation-manager' */
+      'web-components/presentation-manager',
+    ),
+  );
+  await defineWebComponent(
+    () => import(/* webpackChunkName: 'data-loader' */ 'data-loader'),
+    'data-loader',
+  );
+})();
 
 console.log('Hello from index.js');

@@ -8,6 +8,7 @@ module.exports = env => {
     output: {
       filename: '[name].[chunkhash:3].js',
       path: path.resolve(__dirname, 'dist'),
+      chunkFilename: '[name].[chunkhash:3].js',
     },
     target: 'web',
     module: {
@@ -23,14 +24,14 @@ module.exports = env => {
                     'env',
                     {
                       targets: {
-                        browsers: ["last 1 chrome version"],
+                        browsers: ['last 1 chrome version'],
                       },
                       modules: false,
                     },
                   ],
                   ['stage-2'],
                 ],
-              }
+              },
             },
           ],
         },
@@ -48,10 +49,7 @@ module.exports = env => {
       ],
     },
     resolve: {
-      modules: [
-        'node_modules',
-        path.resolve(__dirname, 'src'),
-      ],
+      modules: ['node_modules', path.resolve(__dirname, 'src')],
     },
     devtool: 'source-map',
     devServer: {
@@ -59,7 +57,7 @@ module.exports = env => {
     },
     plugins: [
       new HTMLPlugin({
-        template: path.resolve(__dirname, 'src', 'index.html')
+        template: path.resolve(__dirname, 'src', 'index.html'),
       }),
     ],
   };
