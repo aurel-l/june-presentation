@@ -22,6 +22,12 @@ import defineWebComponent from 'utils/defineWebComponent';
   );
   await defineWebComponent(() =>
     import(
+      /* webpackChunkName: 'presentation-event' */
+      'web-components/presentation-event',
+    ),
+  );
+  await defineWebComponent(() =>
+    import(
       /* webpackChunkName: 'presentation-manager' */
       'web-components/presentation-manager',
     ),

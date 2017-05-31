@@ -42,9 +42,36 @@ class PresentationSlides extends HTMLElement {
     console.log('presentation-footer connected');
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.innerHTML = `
+      <style>
+        footer {
+          display: grid;
+          height: 100%;
+          align-items: center;
+          grid-template-columns: 10% 1fr 10%;
+        }
+
+        footer > * {
+          margin: 0.5em;
+        }
+
+        .start {
+          justify-self: start
+        }
+
+        .center {
+          justify-self: center;
+        }
+
+        .end {
+          justify-self: end;
+        }
+      </style>
       <footer>
-        <slot>Footer</slot>
-        <span id="current"></span> of <span id="total"></span>
+        <span class="start"></span>
+        <span class="center"><slot>Footer</slot></span>
+        <span class="end">
+          <span id="current"></span> of <span id="total"></span>
+        </span>
       </footer>
     `;
     this._currentDOM = shadowRoot.getElementById('current');

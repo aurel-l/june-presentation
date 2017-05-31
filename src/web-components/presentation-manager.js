@@ -27,6 +27,13 @@ class PresentationManager extends HTMLElement {
     if (!this._slideContainer) {
       throw new Error('A slide container is missing');
     }
+    this.addEventListener('next', this.next);
+    this.addEventListener('previous', this.previous);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('next', this.next);
+    this.removeEventListener('previous', this.previous);
   }
 }
 

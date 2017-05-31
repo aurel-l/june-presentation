@@ -14,7 +14,13 @@ module.exports = env => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.js$/i,
+          include: [
+            path.resolve('src'),
+            path.resolve('node_modules', 'data-loader'),
+            path.resolve('node_modules', 'interpro-components'),
+            path.resolve('node_modules', 'pdb-web-components'),
+          ],
           use: [
             {
               loader: 'babel-loader',
@@ -36,13 +42,25 @@ module.exports = env => {
           ],
         },
         {
-          test: /\.css$/,
+          test: /\.css$/i,
           use: [
             {
               loader: 'style-loader',
             },
             {
               loader: 'css-loader',
+            },
+          ],
+        },
+        {
+          test: /\.(jpe?g|png)$/i,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 10 * 1024,
+                name: '[name].[hash:3].[ext]',
+              },
             },
           ],
         },
