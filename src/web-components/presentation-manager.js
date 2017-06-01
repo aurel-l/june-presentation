@@ -8,12 +8,16 @@ class PresentationManager extends HTMLElement {
   // }
 
   next() {
-    this._slideContainer.slide++;
+    try {
+      this._slideContainer.slide++;
+    } catch (_) {}
     this._footer.current = this._slideContainer.slide;
   }
 
   previous() {
-    this._slideContainer.slide--;
+    try {
+      this._slideContainer.slide--;
+    } catch (_) {}
     this._footer.current = this._slideContainer.slide;
   }
 

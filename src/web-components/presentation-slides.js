@@ -26,10 +26,20 @@ class PresentationSlides extends HTMLElement {
     }
     this._slide = +value;
     this.setAttribute('slide', `${_value}`);
+    let prev;
     if (prevSlide) {
-      this._slides[prevSlide - 1].classList.remove('visible');
+      prev = this._slides[prevSlide - 1];
     }
-    this._slides[_value - 1].classList.add('visible');
+    this._transition(prev, this._slides[_value - 1]);
+  }
+
+  async _transition(from, to) {
+    if (from) {
+      from.classList.remove('visible');
+      if (from.onExit) await from.onExit();
+    }
+    to.classList.add('visible');
+    if (to.onEnter) await to.onEnter();
   }
 
   // constructor() {

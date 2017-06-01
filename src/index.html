@@ -7,16 +7,27 @@
   </head>
   <body>
     <presentation-manager>
-      <presentation-event event="next" key="n ArrowRight ArrowDown">
-      </presentation-event>
-      <presentation-event event="previous" key="p ArrowLeft ArrowUp">
-      </presentation-event>
+      <presentation-event
+        event="next"
+        key="n ArrowRight ArrowDown"
+        sourceEvent="keydown"
+      ></presentation-event>
+      <presentation-event
+        event="previous"
+        key="p ArrowLeft ArrowUp"
+        sourceEvent="keydown"
+      ></presentation-event>
       <presentation-slides>
         <section>
           <h1>WebComponents for shareable visualisations</h1>
           <h2>Aurélien <span class="small-caps">Luciani</span></h2>
         </section>
-        <section>
+        <section id="two">
+          <presentation-event
+            event="previous"
+            sourceEvent="click"
+            target="#two"
+          ></presentation-event>
           <h1>Page 2</h1>
         </section>
       </presentation-slides>
