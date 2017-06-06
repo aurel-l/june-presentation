@@ -34,12 +34,63 @@ class PresentationSlides extends HTMLElement {
   }
 
   async _transition(from, to) {
+    let forward = true;
+    // disappearing
     if (from) {
+      forward = from.nextElementSibling === to;
+      if (from.onExit) {
+        await from.onExit();
+      } else if (from.animate) {// default
+        await Promise.all(
+          Array.from(from.children)
+            .filter(el => el.tagName !== 'style')
+            .reverse()
+            .map((el, i) => el.animate(
+              {
+                opacity: [1, 0],
+                filter: ['blur(0)', 'blur(5px)'],
+                transform: [
+                  'translateX(0)',
+                  `translateX(${forward ? '-' : ''}100px)`
+                ],
+              },
+              {
+                duration: 200,
+                delay: i * 10,
+                fill: 'both',
+                easing: 'cubic-bezier(.41,0,.32,1)',
+              }
+            ).finished)
+        );
+      }
       from.classList.remove('visible');
-      if (from.onExit) await from.onExit();
     }
+    // appearing
     to.classList.add('visible');
-    if (to.onEnter) await to.onEnter();
+    if (to.onEnter) {
+      await to.onEnter();
+    } else if (to.animate) {// default
+      await Promise.all(
+        Array.from(to.children)
+          .filter(el => el.tagName !== 'style')
+          .map((el, i) => el.animate(
+            {
+              opacity: [0, 1],
+              filter: ['blur(5px)', 'blur(0)'],
+              transform: [
+                `translateX(${forward ? '' : '-'}100px)`,
+                'translateX(0)'
+              ],
+            },
+            {
+              duration: 500,
+              delay: i * 250,
+              fill: 'both',
+              easing: 'cubic-bezier(.41,0,.32,1)',
+            }
+          ).finished)
+      );
+    }
   }
 
   // constructor() {

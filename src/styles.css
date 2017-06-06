@@ -50,15 +50,44 @@ body {
   color: #ddd;
 }
 
+pre {
+  background-color: #222e;
+  padding: 0 1em;
+}
+
+li {
+  margin: 0 0 1em 0;
+}
+
+a:visited {
+  color: inherit;
+}
+
+input {
+  font-size: large;
+}
+
+input:required:invalid {
+  background-color: red;
+}
+
+:root {
+  --max-bg-offset: 20%;
+  --bg-offset: 0%;
+}
+
 presentation-manager {
   width: 100vw;
   height: 100vh;
   background-image: url('media/background.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right bottom;
+  background-size: calc(100% + var(--max-bg-offset)) auto;
+  background-position-x: calc(100% - var(--bg-offset));
+  background-position-y: bottom;
   display: flex;
   flex-direction: column;
+  transition: background-position-x 0.5s ease-in-out 0.25s;
+  will-change: background-position-x, filter;
 }
 
 presentation-footer {
@@ -71,17 +100,57 @@ presentation-slides {
   flex: 1;
 }
 
-section {
+section, presentation-slide {
   display: none;
-  background-color: #0007;
+  background-color: #0005;
   height: 100%;
   padding: 2em;
 }
 
-section.visible {
+section.visible, presentation-slide.visible {
   display: block;
+  will-change: opacity, filter, transform;
+}
+
+section.visible + section > *,
+presentation-slide.visible + presentation-slide > *,
+section.visible + presentation-slide > *,
+presentation-slide.visible + section > * {
+  will-change: opacity, filter, transform;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex.horizontal {
+  flex-direction: row;
+}
+
+.flex.vertical {
+  flex-direction: column;
+}
+
+.flex.around {
+  justify-content: space-around;
+}
+
+.flex.between {
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 .small-caps {
   font-variant: small-caps;
+}
+
+.hl {
+  color: #76eaff;
+  font-weight: bold;
 }

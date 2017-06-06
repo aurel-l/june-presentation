@@ -67,11 +67,11 @@ class PresentationSlides extends HTMLElement {
         }
       </style>
       <footer>
-        <span class="start"></span>
-        <span class="center"><slot>Footer</slot></span>
-        <span class="end">
+        <span class="start"><slot name="start"></slot></span>
+        <span class="center">
           <span id="current"></span> of <span id="total"></span>
         </span>
+        <span class="end"><slot name="end">Footer</slot></span>
       </footer>
     `;
     this._currentDOM = shadowRoot.getElementById('current');

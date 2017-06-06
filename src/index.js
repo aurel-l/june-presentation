@@ -36,6 +36,18 @@ import defineWebComponent from 'utils/defineWebComponent';
     () => import(/* webpackChunkName: 'data-loader' */ 'data-loader'),
     'data-loader',
   );
+  const pdbWebComponents = () => import(
+    /* webpackChunkName: 'pdb-web-components' */
+    'pdb-web-components'
+  );
+  await defineWebComponent(
+    () => pdbWebComponents().then(m => m.PdbDataLoader),
+    'pdb-data-loader'
+  )
+  await defineWebComponent(
+    () => pdbWebComponents().then(m => m.PdbPrints),
+    'pdb-prints'
+  )
 })();
 
 console.log('Hello from index.js');

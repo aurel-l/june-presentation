@@ -17,21 +17,274 @@
         key="p ArrowLeft ArrowUp"
         sourceEvent="keydown"
       ></presentation-event>
+      <presentation-event
+        event="fullscreen"
+        key="f"
+        sourceEvent="keydown"
+      ></presentation-event>
       <presentation-slides>
         <section>
           <h1>WebComponents for shareable visualisations</h1>
           <h2>Aurélien <span class="small-caps">Luciani</span></h2>
         </section>
-        <section id="two">
-          <presentation-event
-            event="previous"
-            sourceEvent="click"
-            target="#two"
-          ></presentation-event>
-          <h1>Page 2</h1>
+        <section>
+          <h3>Some of our goals for our visualisations:</h3>
+          <ul>
+            <li>Get from <span class="hl">data</span> to an understandable <span class="hl">visual representation</span> of it</li>
+            <li>Having <span class="hl">standalone</span> blocks</li>
+            <li>Try to make it look <span class="hl">consistent</span></li>
+            <li><span class="hl">Avoid redoing</span> work</li>
+            <li><span class="hl">Share</span> them in the community</li>
+          </ul>
+        </section>
+        <section>
+          <style scoped>
+            img {
+              max-height: 50vh;
+            }
+          </style>
+          <h2>A webpage is a graph</h2>
+          <div class="flex vertical">
+            <p>Each node being a component</p>
+            <img src="<%= require('media/graph.svg') %>">
+          </div>
+        </section>
+        <section>
+          <h3>Approach 1: iframe</h3>
+          <ul>
+            <li><span class="hl">Easy</span> to integrate</li>
+            <li><span class="hl">Declarative</span> & <span class="hl">fault tolerant</span></li>
+            <li>Doesn't break other blocks</li>
+            <li>No easy way to change style</li>
+            <li>No easy way to integrate it with other blocks</li>
+            <li>Depends on availability of hosting service</li>
+          </ul>
+          <h5>Just works, but can't modify</h5>
+        </section>
+        <section>
+          <style scoped>
+            iframe {
+              width: 100%;
+              height: 75%;
+            }
+          </style>
+          <h3>iframe example</h3>
+          <iframe
+              src="https://www.ebi.ac.uk/pdbe/entry/view3D/1cds/?view=entry_index&viewer=jmol&controls=codename_hero"
+          ></iframe>
+        </section>
+        <section>
+          <h3>Approach 2: use library directly</h3>
+          <ul>
+            <li><span class="hl">Harder</span> to integrate</li>
+            <li><span class="hl">Imperative</span>, might break other bits</span></li>
+            <li>Might break other blocks</li>
+            <li>Free to do whatever it wants</li>
+            <li>Style leaks or other interactions</li>
+            <li>Requires knowledge of the used library</li>
+          </ul>
+          <h3>Approach 3: use library or framework-related component</h3>
+          <ul>
+            <li>example: Angular or React component</li>
+            <li>Only makes thinks easier for original developer</li>
+            <li>Might interact badly with main developer's set-up</li>
+            <li>Bigger payload</li>
+          </ul>
+          <h5>Typically for a component whose goal is not to be shared</h5>
+          <h6>Both might cause library clashes if expecting them globally</h6>
+        </section>
+        <section>
+          <h3>
+            <a
+              href="https://www.ebi.ac.uk/pdbe/pdb-component-library/doc.html"
+              target="_blank"
+            >
+              Existing PDB components:
+            </a>
+          </h3>
+          <ul>
+            <li>Set of predefined, lightly configurable components</li>
+            <li>Based on Angular 1</li>
+            <li>Also, depends on D3 (version 3.5)</li>
+            <li>pdb-prints payload (minified):
+              <ul>
+                <li>main lib 166kB</li>
+                <li>main lib style 20kB</li>
+                <li>Angular 50kB</li>
+                <li>D3 50kB</li>
+              </ul>
+            </li>
+            <li>“Unexpected” API</li>
+            <li>Completely breaks with our React-based website</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Workarounds</h3>
+          <div class="flex vertical">
+            <img src="<%= require('media/crazy-adapter.jpg') %>">
+          </div>
+        </section>
+        <section>
+          <style scoped>
+            .grid {
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 3em auto;
+            }
+
+            .grid img {
+              max-width: 45vw;
+            }
+          </style>
+          <h2>Common components</h2>
+          <div class="grid" style="width: 100%;">
+            <span>UniProt</span>
+            <span>InterPro</span>
+            <img src="<%= require('media/uniprot.png') %>" style="width: 45vw;">
+            <img src="<%= require('media/interpro.png') %>" style="width: 45vw;">
+          </div>
+        </section>
+        <section>
+          <h3>A “new” way</h3>
+          <h4>Web Component</h4>
+          <ul>
+            <li>
+              Actually a set of 4 new standards
+              <ul class="hl">
+                <li>Templates</li>
+                <li>Custom Elements</li>
+                <li>Shadow DOM</li>
+                <li>HTML Imports</li>
+              </ul>
+            </li>
+            <li>Each can be used or not, independently</li>
+            <li>Separation of concern</li>
+            <li>Declarative use favoured, imperative for advanced</li>
+            <li>A long way through standardisation, but getting there</li>
+            <li>Developer should stick to existing behaviours in standards</li>
+            <li>Not a silver bullet</li>
+          </ul>
+        </section>
+        <section>
+          <style scoped>
+            div.flex.vertical.around {
+              height: 100%;
+            }
+          </style>
+          <div class="flex vertical around">
+            <img src="<%= require('media/ara.gif') %>">
+          </div>
+        </section>
+        <section>
+          <style scoped>
+            div.flex.vertical.around {
+              height: 100%;
+            }
+          </style>
+          <div class="flex vertical around">
+            <img src="<%= require('media/home-cinema.jpg') %>">
+          </div>
+        </section>
+        <section>
+          <style scoped>
+            label {
+              margin: 1em;
+            }
+
+            pdb-prints {
+              margin: 2em auto;
+              transition: background-color ease-in-out 0.5s;
+            }
+
+            pdb-prints:hover {
+              background-color: #dddd
+            }
+          </style>
+          <h2>PDB</h2>
+          <div class="flex vertical">
+            <label>
+              theme hue:
+              <input
+                type="range"
+                min="0"
+                max="360"
+                step="1"
+                value="106"
+                aria-controls="pdb-prints-wc"
+                data-custom-property="--theme-color"
+              >
+            </label>
+            <label>
+              PDB ID:
+              <input
+                type="text"
+                required
+                pattern="[0-9a-zA-Z]{4}"
+                value="1cbs"
+                aria-controls="pdb-data-loader-wc"
+                data-attribute="pdbid"
+              >
+            </label>
+            <pdb-prints size="128" id="pdb-prints-wc">
+              <pdb-data-loader pdbid="1cbs" id="pdb-data-loader-wc">
+              </pdb-data-loader>
+            </pdb-prints>
+            <pre>
+              <code>
+&lt;pdb-prints size="128px"&gt;
+  &lt;pdb-data-loader pdbid="1CBS"&gt;
+&lt;/pdb-prints&gt;</code>
+            </pre>
+            <p>35kB unminified, all included</p>
+          </div>
+        </section>
+        <section>
+          <style scoped>
+            img {
+              max-height: 50vh;
+            }
+          </style>
+          <h2>A webpage is a graph</h2>
+          <div class="flex vertical">
+            <p>Each node being a component</p>
+            <img src="<%= require('media/graph.svg') %>">
+          </div>
+        </section>
+        <section>
+          <h3>Doubts</h3>
+          <ul>
+            <li>New, and not widely used yet</li>
+            <li>Questions about <span class="hl">best practices</span>
+              <ul>
+                <li>Optimise use of library (e.g. D3)</li>
+                <li>Who should define them? Developer or user?</li>
+                <li>What to do if behaviour not existing</li>
+                <li>Granularity of components</li>
+                <li>…</li>
+              </ul>
+            </li>
+            <li>A lot of <span class="hl">boilerplate</span> (use a library sparsely?)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Current targets</h3>
+          <ul>
+            <li>Anything common (<code>data-loader</code>)</li>
+            <li>InterPro components (<em>à la</em> PDB prints)</li>
+            <li>Domain architecture viewer (in collaboration with UniProt)</li>
+            <li>Taxonomy view in Hmmer</li>
+            <li>Logo viewer</li>
+            <li>And anything that takes data in and outputs a visualisation</li>
+          </ul>
+          <p>Also, try to get PDBe on board</p>
         </section>
       </presentation-slides>
-      <presentation-footer>Footer content</presentation-footer>
+      <presentation-footer>
+        <span slot="start">Tue 6 May</span>
+        <img
+          slot="end"
+          src="<%= require('media/EBI.png') %>"
+        >
+      </presentation-footer>
     </presentation-manager>
   </body>
 </html>

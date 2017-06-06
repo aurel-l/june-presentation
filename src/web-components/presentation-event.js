@@ -16,6 +16,7 @@ class PresentationEvent extends HTMLElement {
 
   _onEvent = e => {
     if (e.key && this._keys.length && !this._keys.includes(e.key)) return;
+    if (e.target.tagName === 'INPUT') return;
     this.dispatchEvent(new CustomEvent(this._event, { bubbles: true }));
   };
 }
