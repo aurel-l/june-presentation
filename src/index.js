@@ -43,11 +43,19 @@ import defineWebComponent from 'utils/defineWebComponent';
   await defineWebComponent(
     () => pdbWebComponents().then(m => m.PdbDataLoader),
     'pdb-data-loader'
-  )
+  );
   await defineWebComponent(
     () => pdbWebComponents().then(m => m.PdbPrints),
     'pdb-prints'
-  )
+  );
+  const interProComponents = () => import(
+    /* webpackChunkName: 'interpro-components' */
+    'interpro-components'
+  );
+  await defineWebComponent(
+    () => interProComponents().then(m => m.InterproType),
+    'interpro-type'
+  );
 })();
 
 console.log('Hello from index.js');

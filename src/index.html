@@ -43,9 +43,10 @@
               max-height: 50vh;
             }
           </style>
-          <h2>A webpage is a graph</h2>
+          <h3>A website is a graph</h3>
           <div class="flex vertical">
             <p>Each node being a component</p>
+            <p>Each page is a tree</p>
             <img src="<%= require('media/graph.svg') %>">
           </div>
         </section>
@@ -83,6 +84,8 @@
             <li>Style leaks or other interactions</li>
             <li>Requires knowledge of the used library</li>
           </ul>
+        </section>
+        <section>
           <h3>Approach 3: use library or framework-related component</h3>
           <ul>
             <li>example: Angular or React component</li>
@@ -135,7 +138,7 @@
               max-width: 45vw;
             }
           </style>
-          <h2>Common components</h2>
+          <h3>Common components</h3>
           <div class="grid" style="width: 100%;">
             <span>UniProt</span>
             <span>InterPro</span>
@@ -199,7 +202,7 @@
               background-color: #dddd
             }
           </style>
-          <h2>PDB</h2>
+          <h3>PDB</h3>
           <div class="flex vertical">
             <label>
               theme hue:
@@ -239,13 +242,41 @@
         </section>
         <section>
           <style scoped>
+            .grid {
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 5em auto auto;
+            }
+          </style>
+          <h3>InterPro components</h3>
+          <div class="grid" style="width: 100%;">
+            <span class="hl">Resolved</span>
+            <span>Unresolved</span>
+            <interpro-type type="domain" expanded>Domain</interpro-type>
+            <x-interpro-type type="domain" expanded>Domain</x-interpro-type>
+            <pre>
+              <code>
+&lt;interpro-type type="domain" expanded&gt;
+  Domain
+&lt;/interpro-type&gt;</code>
+            </pre>
+            <pre>
+              <code>
+&lt;x-interpro-type type="domain" expanded&gt;
+  Domain
+&lt;/x-interpro-type&gt;</code>
+            </pre>
+          </div>
+        </section>
+        <section>
+          <style scoped>
             img {
               max-height: 50vh;
             }
           </style>
-          <h2>A webpage is a graph</h2>
+          <h3>A website is a graph</h3>
           <div class="flex vertical">
             <p>Each node being a component</p>
+            <p>Each page is a tree</p>
             <img src="<%= require('media/graph.svg') %>">
           </div>
         </section>
